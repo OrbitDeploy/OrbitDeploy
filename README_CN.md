@@ -1,5 +1,7 @@
 # OrbitDeploy
 
+**语言版本 / Language:** [🇨🇳 中文](README_CN.md) | [🇺🇸 English](README.md)
+
 ## 🚀 OrbitDeploy 是什么？
 
 OrbitDeploy 是一个自托管的、基于 Web 的平台，用于管理容器化应用程序的部署。它提供了一个现代化的 Web 界面，可以轻松管理容器配置、反向代理和应用程序部署。

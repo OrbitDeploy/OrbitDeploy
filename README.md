@@ -1,5 +1,7 @@
 # OrbitDeploy
 
+**Language / 语言版本:** [🇺🇸 English](README.md) | [🇨🇳 中文](README_CN.md)
+
 ### 🚀 What is OrbitDeploy?
 
 OrbitDeploy is a self-hosted, web-based platform for managing containerized application deployments. It provides a modern web interface to manage container configurations, reverse proxy, and application deployments with ease.
@@ -92,4 +94,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ### 🔒 Security
 
 For security issues, please see our [Security Policy](SECURITY.md).
-# OrbitDeploy
