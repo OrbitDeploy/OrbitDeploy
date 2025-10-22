@@ -1,0 +1,63 @@
+# Binaries
+*.exe
+app
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+
+# Build artifacts
+assets/
+backend/assets/
+
+# Log files
+logs/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Node.js dependencies
+frontend/node_modules/
+frontend/.vite/
+frontend/disk/
+
+# Temporary dummy frontend for build testing
+frontend/dist/
+
+# Go workspace
+go.work
+
+# Build outputs and temporary files
+cookies.txt
+main_linux
+main_test
+test-build
+=======
+*.tar
+*.tar.gz
+/tmp/
+main
+
+
+
+
+test_cookies.txt
+test-deploy-complete
+orbitctl/orbitctl.toml
+*.test
+
+test-build
+/node_modules/
+orbit-deploy

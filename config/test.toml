@@ -1,0 +1,27 @@
+# 测试环境配置文件
+# 注意：本文件中的敏感信息仅用于测试环境
+# 生产环境请使用环境变量配置：JWT_ACCESS_SECRET, JWT_REFRESH_SECRET, ORBIT_ENCRYPTION_KEY
+[Database]
+Type = "sqlite"
+Dsn = "/tmp/web-deploy-test.db"
+TablePrefix = ""
+
+[Jwt]
+# 测试用 JWT Secret - 生产环境请通过 JWT_ACCESS_SECRET 和 JWT_REFRESH_SECRET 环境变量配置
+Secret = "test-secret-key-for-development"
+Expire = 3600
+
+[Admin]
+Username = "admin"
+Password = "admin"
+
+[Http]
+Host = "0.0.0.0"
+Port = "8080"
+Cors = true
+
+[Upload]
+MaxFileSize = 524288000
+
+[Volumes]
+BasePath = "/tmp/volumes"

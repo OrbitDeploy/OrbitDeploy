@@ -1,0 +1,71 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.24.2'
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Get version
+        id: version
+        run: echo "::set-output name=tag::$(jq -r .version frontend/package.json)"
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          bun install
+          bun run build
+
+      - name: Build backend
+        working-directory: ./
+        run: |
+          export GOOS=linux
+          export GOARCH=amd64
+          go build -ldflags="-s -w" -o orbit-deploy main.go
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          release_name: Release ${{ steps.version.outputs.tag }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./orbit-deploy
+          asset_name: orbit-deploy
+          asset_content_type: application/octet-stream
+
+      - name: Upload Install Script
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./script/install.sh
+          asset_name: install.sh
+          asset_content_type: application/x-shellscript
