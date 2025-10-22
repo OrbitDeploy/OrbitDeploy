@@ -1,0 +1,37 @@
+api_version = "webdeploy.io/v1"
+kind = "DeploymentSpec"
+
+# 应用基础信息
+app_name = "my-blog"           # 必填：应用名称（全局唯一）
+project = "my-project"         # 可选：项目名称，默认 "default"
+environment = "production"     # 可选：环境名称，默认 "production"
+
+# 镜像配置（可选，如果不指定则使用 Dockerfile 构建）
+[image]
+# ref = "my-registry/my-blog:v1.0.0"  # 使用现有镜像
+
+# 容器配置（必须至少有一个容器）
+[[containers]]
+name = "web"
+publish_port = 8080
+
+# 构建配置（可选）
+[build]
+dockerfile = "Dockerfile"     # 默认 Dockerfile
+context = "."                 # 默认当前目录
+
+# 高级配置示例（通常通过 Web 界面配置）
+# [[containers.volumes]]
+# source = "/data/blog-content"
+# target = "/app/content"
+# read_only = false
+
+# [containers.healthcheck]
+# kind = "http"
+# path = "/health"
+# timeout_seconds = 5
+# retries = 3
+
+# [containers.resources]
+# cpu = "0.5"
+# memory = "512Mi"
