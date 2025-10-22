@@ -8,6 +8,8 @@ on:
 jobs:
   build-release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -25,16 +27,17 @@ jobs:
         run: echo "::set-output name=tag::$(jq -r .version frontend/package.json)"
 
       - name: Build frontend
-        working-directory: ./frontend
         run: |
+          cd frontend
           bun install
           bun run build
 
       - name: Build backend
+        working-directory: ./
         run: |
           export GOOS=linux
           export GOARCH=amd64
-          go build -o orbit-deploy main.go
+          go build -ldflags="-s -w" -o orbit-deploy main.go
 
       - name: Create Release
         id: create_release
