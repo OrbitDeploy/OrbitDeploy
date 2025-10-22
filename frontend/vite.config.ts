@@ -13,6 +13,7 @@ const packageJson = JSON.parse(
 );
 
 export default defineConfig({
+  root: ".",
   plugins: [tailwindcss(), solidPlugin(), removeConsole()],
   server: {
     port: 3000,
